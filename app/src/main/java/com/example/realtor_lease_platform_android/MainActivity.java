@@ -1,5 +1,6 @@
 package com.example.realtor_lease_platform_android;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ActivityNotFoundException;
@@ -14,6 +15,13 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.net.Uri;
 import android.webkit.WebChromeClient;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
     private WebView webView;
@@ -30,6 +38,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initWebView();
+        initFirebase();
+    }
+
+
+    private void initFirebase(){
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( this,  new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+                String updatedToken = instanceIdResult.getToken();
+                Log.d("initFirebase",updatedToken);
+
+            }
+        });
+    }
+
+    private void initWebView(){
         webView = findViewById(R.id.webview);
         webView.setWebViewClient(webViewClient);
         WebSettings webSettings = webView.getSettings();
