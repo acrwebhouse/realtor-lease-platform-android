@@ -17,7 +17,7 @@ import android.webkit.WebChromeClient;
 
 public class MainActivity extends AppCompatActivity {
     private WebView webView;
-    private String url = "http://34.81.209.11:8080/";
+    private String url = "https://matchrentdev.com/";
 
     private ValueCallback<Uri> mUploadMessage;
     public ValueCallback<Uri[]> uploadMessage;
