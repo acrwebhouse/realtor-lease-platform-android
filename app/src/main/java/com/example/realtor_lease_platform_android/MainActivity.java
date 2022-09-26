@@ -16,32 +16,40 @@ import android.view.KeyEvent;
 import android.net.Uri;
 import android.webkit.WebChromeClient;
 
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.example.realtor_lease_platform_android.tool.Factory;
+import com.example.realtor_lease_platform_android.tool.Model;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
-import com.google.firebase.messaging.FirebaseMessaging;
+
+import com.example.realtor_lease_platform_android.define.Constants;
 
 public class MainActivity extends AppCompatActivity {
     private WebView webView;
-    private String url = "https://matchrentdev.com/";
+    private String url = Constants.SERVER_URL;
 
     private ValueCallback<Uri> mUploadMessage;
     public ValueCallback<Uri[]> uploadMessage;
     public static final int REQUEST_SELECT_FILE = 100;
     private final static int FILECHOOSER_RESULTCODE = 1;
 
+    private Factory factory = Factory.getInstance();
+    private Model controlModel;
 
     //private String url = "http://www.google.com";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        createObj();
         initWebView();
         initFirebase();
     }
 
+
+    private void createObj() {
+        controlModel = factory.createModel(this);
+    }
 
     private void initFirebase(){
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( this,  new OnSuccessListener<InstanceIdResult>() {
