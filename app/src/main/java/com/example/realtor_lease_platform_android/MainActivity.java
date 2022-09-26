@@ -16,6 +16,7 @@ import android.view.KeyEvent;
 import android.net.Uri;
 import android.webkit.WebChromeClient;
 
+import com.example.realtor_lease_platform_android.role.Config;
 import com.example.realtor_lease_platform_android.tool.Factory;
 import com.example.realtor_lease_platform_android.tool.Model;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -49,6 +50,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void createObj() {
         controlModel = factory.createModel(this);
+
+        Config config = new Config("firebaseToken", "account", "password", "notificationId");
+        controlModel.insertConfig(config);
+
+        Config r = controlModel.getConfig();
+        Log.d("db", "===1111=="+r.getAccount());
+        Log.d("db", "===2222=="+r.getPassword());
+        Log.d("db", "===3333=="+r.getFirebaseToken());
+        Log.d("db", "===4444=="+r.getNotificationId());
+//        Config config2 = new Config("firebaseToken3", "account3", "password3", "notificationId3");
+//        controlModel.updateConfig(config2);
+//        Log.d("db", "===1111=="+r.getAccount());
+//        Log.d("db", "===2222=="+r.getPassword());
+//        Log.d("db", "===3333=="+r.getFirebaseToken());
+//        Log.d("db", "===4444=="+r.getNotificationId());
+//        controlModel.deleteConfig();
     }
 
     private void initFirebase(){

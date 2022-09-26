@@ -13,6 +13,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.realtor_lease_platform_android.define.Constants;
+import com.example.realtor_lease_platform_android.role.Config;
 
 
 public class DBConnection extends SQLiteOpenHelper {
@@ -27,15 +28,7 @@ public class DBConnection extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         //Factory factory = new Factory();
         Log.d("db", "開始建置資料庫");
-        Log.d("db", "1");
-        db.execSQL(Constants.USER_TABLE_CREATE_SQL);
-        Log.d("db", "2");
-        db.execSQL(Constants.SYSTEM_INFO_TABLE_CREATE_SQL);
-        Log.d("db", "3");
-        db.execSQL(Constants.SERVER_TABLE_CREATE_SQL);
-        Log.d("db", "4");
-        db.execSQL(Constants.PROJECT_TABLE_CREATE_SQL);
-        Log.d("db", "5");
+        db.execSQL(Constants.CONFIG_TABLE_CREATE_SQL);
         Log.d("db", "資料庫建置完成");
     }
 
@@ -54,6 +47,57 @@ public class DBConnection extends SQLiteOpenHelper {
         if (!writeDatabase.equals(null))
             writeDatabase.close();
     }
+
+    public long insertConfig(Config config) {
+        ContentValues values = new ContentValues();
+        values.put(Constants.ID_SQL, 0);
+        values.put(Constants.CONFIG_ACCOUNT_SQL, config.getAccount());
+        values.put(Constants.CONFIG_PASSWORD_SQL, config.getPassword());
+        values.put(Constants.CONFIG_FIREBASE_TOKEN_SQL, config.getFirebaseToken());
+        values.put(Constants.CONFIG_NOTIFICATION_ID_SQL, config.getNotificationId());
+        long count = writeDatabase.insert(Constants.TABLE_CONFIG_SQL, null, values);
+        return count;
+    }
+
+    public int updateConfigByPK(Config config) {
+        ContentValues values = new ContentValues();
+        values.put(Constants.CONFIG_ACCOUNT_SQL, config.getAccount());
+        values.put(Constants.CONFIG_PASSWORD_SQL, config.getPassword());
+        values.put(Constants.CONFIG_FIREBASE_TOKEN_SQL, config.getFirebaseToken());
+        values.put(Constants.CONFIG_NOTIFICATION_ID_SQL, config.getNotificationId());
+        String whereClause = StringProcess.getQueryConfigWhereStringByPK(config);
+        int count = writeDatabase.update(Constants.TABLE_CONFIG_SQL, values, whereClause, null);
+        return count;
+    }
+
+    public Config getConfig() {
+        Factory factory = Factory.getInstance();
+        List<Config> configList = new ArrayList<Config>();
+        Cursor cursor = readDatabase.query(Constants.TABLE_CONFIG_SQL, null, null, null, null, null, null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            for (int i = 0; i < cursor.getCount(); cursor.moveToNext(), i++) {
+                configList.add(factory.createConfig());
+                for (int j = 0; j < cursor.getColumnCount(); j++)
+                    configList.get(i).setAttribute(j, cursor.getString(j));
+            }
+        }
+        cursor.close();
+
+        if(configList.size()>0){
+            return configList.get(0);
+        }
+        return null;
+    }
+
+     public int deleteConfig() {
+        Config config = new Config();
+        config.setAttribute(0,"0");
+        String whereClause = StringProcess.getQueryConfigWhereStringByPK(config);
+        int count = writeDatabase.delete(Constants.TABLE_CONFIG_SQL, whereClause, null);
+        return count;
+    }
+
 //
 //    public long insertUser(User user) {
 //        ContentValues values = new ContentValues();

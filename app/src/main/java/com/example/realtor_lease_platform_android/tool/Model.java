@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.realtor_lease_platform_android.role.Config;
 import com.example.realtor_lease_platform_android.tool.Factory;
 
 
@@ -82,6 +83,32 @@ public class Model {
             dbHelper = null;
         }
     }
+
+    public void insertConfig(Config config) {
+        if (dbHelper != null) {
+            dbHelper.insertConfig(config);
+        }
+    }
+
+    public void updateConfig(Config config) {
+        if (dbHelper != null) {
+            dbHelper.updateConfigByPK(config);
+        }
+    }
+
+    public Config getConfig() {
+        if (dbHelper != null) {
+            return dbHelper.getConfig();
+        }
+        return null;
+    }
+
+    public void deleteConfig() {
+        if (dbHelper != null) {
+            dbHelper.deleteConfig();
+        }
+    }
+
 //
 //    public boolean isOnline() {
 //        ConnectivityManager connectivityManager = (ConnectivityManager) controlActivity.getSystemService(Context.CONNECTIVITY_SERVICE);;

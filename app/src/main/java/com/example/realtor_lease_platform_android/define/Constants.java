@@ -110,6 +110,22 @@ public class Constants {
             + USER_SERVER_IP_SQL + " text not null ,"
             + "CONSTRAINT "+USER_ID_SQL+" PRIMARY KEY ("+USER_USERNAME_SQL+","+USER_PROJECT_NAME_SQL+","+USER_SERVER_IP_SQL+")); ";
 
+
+    //table config
+    public static final String TABLE_CONFIG_SQL = "Config";
+    public static final String CONFIG_FIREBASE_TOKEN_SQL = "firebaseToken";
+    public static final String CONFIG_NOTIFICATION_ID_SQL = "notificationId";
+    public static final String CONFIG_ACCOUNT_SQL = "account";
+    public static final String CONFIG_PASSWORD_SQL = "password";
+
+    public static final String CONFIG_TABLE_CREATE_SQL = "CREATE TABLE "
+            + TABLE_CONFIG_SQL + " ( " + ID_SQL + "  INTEGER primary key autoincrement, "
+            + CONFIG_FIREBASE_TOKEN_SQL + " text not null,"
+            + CONFIG_NOTIFICATION_ID_SQL + " text not null,"
+            + CONFIG_ACCOUNT_SQL + " text not null,"
+            + CONFIG_PASSWORD_SQL + " text not null"
+            +"); ";
+
     //table system info
     public static final String TABLE_SYSTEM_INFO_SQL = "SystemInfo";
     public static final String SYSTEM_INFO_FIREBASE_TOKEN_SQL = "firebaseToken";

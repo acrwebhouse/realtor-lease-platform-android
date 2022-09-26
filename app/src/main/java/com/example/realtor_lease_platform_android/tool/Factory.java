@@ -6,6 +6,7 @@ import android.content.Context;
 import android.webkit.WebView;
 import android.widget.ScrollView;
 
+import com.example.realtor_lease_platform_android.role.Config;
 import com.example.realtor_lease_platform_android.tool.DBConnection;
 
 
@@ -58,5 +59,12 @@ public class Factory {
         return new Model();
     }
 
+    public Config createConfig(){
+        return new Config();
+    }
+
+    public Config createConfig(int id,String firebaseToken,String account,String password,String notificationId){
+        return new Config(id,firebaseToken,account,password,notificationId);
+    }
 
 }
