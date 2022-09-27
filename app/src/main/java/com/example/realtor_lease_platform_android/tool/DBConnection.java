@@ -20,7 +20,7 @@ public class DBConnection extends SQLiteOpenHelper {
 
     SQLiteDatabase readDatabase = null;
     SQLiteDatabase writeDatabase = null;
-
+    
     public DBConnection(Context ctx) {
         super(ctx, Constants.DATABASE_NAME, null, Constants.DATABASE_VERSION);
     }

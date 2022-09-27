@@ -50,16 +50,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void createObj() {
         controlModel = factory.createModel(this);
-
-        Config config = new Config("firebaseToken", "account", "password", "notificationId", "userId");
-        controlModel.insertConfig(config);
-
+        controlModel.initDB();
+      //  Config config = new Config("firebaseToken", "account", "password", "notificationId", "userId");
+//        controlModel.insertConfig(config);
+//
         Config r = controlModel.getConfig();
-        Log.d("db", "===1111=="+r.getAccount());
-        Log.d("db", "===2222=="+r.getPassword());
-        Log.d("db", "===3333=="+r.getFirebaseToken());
-        Log.d("db", "===4444=="+r.getNotificationId());
-        Log.d("db", "===5555=="+r.getUserId());
+        Log.d("db", "===config=account="+r.getAccount());
+        Log.d("db", "===config=password="+r.getPassword());
+        Log.d("db", "===config=firebaseToken="+r.getFirebaseToken());
+        Log.d("db", "===config=notificationId="+r.getNotificationId());
+        Log.d("db", "===config=userId="+r.getUserId());
 //        Config config2 = new Config("firebaseToken3", "account3", "password3", "notificationId3");
 //        controlModel.updateConfig(config2);
 //        Log.d("db", "===1111=="+r.getAccount());
@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
             public void onSuccess(InstanceIdResult instanceIdResult) {
                 String updatedToken = instanceIdResult.getToken();
                 Log.d("initFirebase",updatedToken);
+                controlModel.saveFirebaseToken(updatedToken);
 
             }
         });

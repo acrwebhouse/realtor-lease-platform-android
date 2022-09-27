@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.realtor_lease_platform_android.define.Constants;
 import com.example.realtor_lease_platform_android.role.Config;
 import com.example.realtor_lease_platform_android.tool.Factory;
 
@@ -36,7 +37,7 @@ public class Model {
     Factory factory = Factory.getInstance();
     DBConnection dbHelper;
     Activity controlActivity;
-//    HttpClient httpClient;
+    HttpClient httpClient;
     Application controlApplication;
     Context controlContext;
 
@@ -68,7 +69,7 @@ public class Model {
     }
 
     private void createObj() {
-//        httpClient = factory.createHttpClient();
+        httpClient = factory.createHttpClient();
         if (controlActivity != null) {
             dbHelper = factory.createDBConnection(controlActivity);
             dbHelper.DBInit();
@@ -81,6 +82,63 @@ public class Model {
             dbHelper.DBInit();
         } else {
             dbHelper = null;
+        }
+    }
+
+    public void initDB(){
+        if (dbHelper != null) {
+            Config config = dbHelper.getConfig();
+            if(config == null){
+                Config insertConfig = factory.createConfig();
+                insertConfig(insertConfig);
+            }
+        }
+    }
+
+    public JSONObject getJsonObject(String JSONString) {
+        JSONObject jsonObject = null;
+        try {
+            if (JSONString.indexOf(Constants.OPEN_BRACE) >= 0) {
+                JSONString = JSONString.substring(JSONString.indexOf(Constants.OPEN_BRACE), JSONString.lastIndexOf(Constants.CLOSE_BRACE) + 1);
+            }
+            jsonObject = new JSONObject(JSONString);
+        } catch (JSONException e) {
+        }
+        return jsonObject;
+    }
+
+    public void saveFirebaseToken(String firebaseToken){
+        if (dbHelper != null) {
+            Config config = dbHelper.getConfig();
+            if(config != null){
+                config.setAttribute(1,firebaseToken);
+                updateConfig(config);
+            }else{
+                Config insertConfig = factory.createConfig();
+                insertConfig.setAttribute(1,firebaseToken);
+                insertConfig(insertConfig);
+            }
+            config = dbHelper.getConfig();
+            if(config.getNotificationId().equals(Constants.EMPTY_STRING)){
+                Log.d("http", "http rest api  addNotification  start         ");
+                httpClient.addNotification(config.getFirebaseToken(),config.getUserId(),this);
+            }else{
+
+            }
+        }
+    }
+
+    public void saveNotificationId(String firebaseToken){
+        if (dbHelper != null) {
+            Config config = dbHelper.getConfig();
+            if(config != null){
+                config.setAttribute(1,firebaseToken);
+                updateConfig(config);
+            }else{
+                Config insertConfig = factory.createConfig();
+                insertConfig.setAttribute(1,firebaseToken);
+                insertConfig(insertConfig);
+            }
         }
     }
 

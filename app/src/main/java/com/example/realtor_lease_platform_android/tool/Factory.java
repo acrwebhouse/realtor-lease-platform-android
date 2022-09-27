@@ -26,14 +26,9 @@ public class Factory {
     private Factory() {
     }
 
-    /*
-    public DBConnection createDBConnection(Activity activity) {
-        return new DBConnection(activity);
+    public HttpClient createHttpClient() {
+        return new HttpClient();
     }
-
-    public DBConnection createDBConnection(Application application) {
-        return new DBConnection(application);
-    }*/
 
     public DBConnection createDBConnection(Context context) {
         return new DBConnection(context);

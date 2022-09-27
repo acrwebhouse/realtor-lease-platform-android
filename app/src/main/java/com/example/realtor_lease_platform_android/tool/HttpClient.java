@@ -3,6 +3,9 @@ package com.example.realtor_lease_platform_android.tool;
 import android.util.Log;
 
 import com.example.realtor_lease_platform_android.define.Constants;
+import com.example.realtor_lease_platform_android.define.HttpHandler;
+
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,6 +21,7 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class HttpClient {
     private OkHttpClient okHttpClient;
@@ -79,34 +83,40 @@ public class HttpClient {
     public Call getCall(Request request) {
         return okHttpClient.newCall(request);
     }
-//
-//    public void setTagValue(final String projectName, final String tags, final HttpHandler handler ){ //TagsInfoValueController tagsInfoValueController) {
-//        RequestBody requestBody = new FormBody.Builder()
-//                .add(Constants.TAGS_UPPERCASE, tags)
-//                .build();
-//        Request request = new Request.Builder()
-//                .url(StringProcess.addProjectNameToUrl(Constants.SET_TAG_VALUES_REST_API, projectName))
-//                .post(requestBody)
-//                .addHeader(Constants.COOKIE, StringProcess.getCookieString(serverToken))
-//                .build();
-//        Call call = okHttpClient.newCall(request);
-//        call.enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                Log.d("http", "http rest api  setTagValue  fail         ");
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                Log.d("http", "http rest api  setTagValue  success  ");
-//                String receiveMessage = response.body().string();
-//                Log.d("http", "http rest api  setTagValue  success   receiveMessage   " + receiveMessage);
-//                handler.completion("setTagValues", receiveMessage);
-//                //tagsInfoValueController.setTagValueResponse(receiveMessage);
-////                controller.alarmAckResponse(receiveMessage);
-//            }
-//        });
-//    }
+
+    public void addNotification(final String firebaseToken, final String userId ,Model controlModel ){
+        RequestBody requestBody = new FormBody.Builder()
+                .add(Constants.TOKEN, firebaseToken)
+                .add(Constants.USER_ID, userId)
+                .add(Constants.TYPE, Constants.ANDROID_NOTIFICATION_TYPE)
+                .build();
+        Request request = new Request.Builder()
+                .url(Constants.ADD_NOTIFICATION_REST_API)
+                .post(requestBody)
+                .build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d("http", "http rest api  addNotification  fail         ");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Log.d("http", "http rest api  addNotification  success  ");
+                String receiveMessage = response.body().string();
+                JSONObject json = controlModel.getJsonObject(receiveMessage);
+
+
+
+
+                Log.d("http", "http rest api  addNotification  success   receiveMessage   " + receiveMessage);
+
+                //tagsInfoValueController.setTagValueResponse(receiveMessage);
+//                controller.alarmAckResponse(receiveMessage);
+            }
+        });
+    }
 //
 //    public void alarmAck(final String projectName, final String tags, final Controller controller) {
 //        RequestBody requestBody = new FormBody.Builder()
