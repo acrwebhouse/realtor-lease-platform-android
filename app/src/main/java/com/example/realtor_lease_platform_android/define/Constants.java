@@ -160,8 +160,10 @@ public class Constants {
     public static final String SERVER_TOKEN_TITLE="WDT=";
     public static final String SEMICOLON=";";
     public static final String _ID = "_id";
+    public static final String ID = "id";
 
     //rest api
     public static String ADD_NOTIFICATION_REST_API = SERVER_URL + "user-service/notification/addNotification";
+    public static String EDIT_NOTIFICATION_REST_API = SERVER_URL + "user-service/notification/editNotification";
 
 }

@@ -123,7 +123,7 @@ public class Model {
                 Log.d("http", "http rest api  addNotification  start         ");
                 httpClient.addNotification(config.getFirebaseToken(),config.getUserId(),this);
             }else{
-
+                httpClient.editNotification(config.getFirebaseToken(),config.getUserId(),config.getNotificationId());
             }
         }
     }
