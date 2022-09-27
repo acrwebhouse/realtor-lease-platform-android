@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.realtor_lease_platform_android.define.Constants;
 import com.example.realtor_lease_platform_android.define.HttpHandler;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -105,15 +106,17 @@ public class HttpClient {
             public void onResponse(Call call, Response response) throws IOException {
                 Log.d("http", "http rest api  addNotification  success  ");
                 String receiveMessage = response.body().string();
-                JSONObject json = controlModel.getJsonObject(receiveMessage);
-
-
-
-
                 Log.d("http", "http rest api  addNotification  success   receiveMessage   " + receiveMessage);
-
-                //tagsInfoValueController.setTagValueResponse(receiveMessage);
-//                controller.alarmAckResponse(receiveMessage);
+                JSONObject json = controlModel.getJsonObject(receiveMessage);
+                try {
+                    if(json.get(Constants.STATUS).toString().equals(Constants.TRUE_STRING)){
+                        JSONObject data = (JSONObject) json.get(Constants.DATA);
+                        String id = data.getString(Constants._ID);
+                        controlModel.saveNotificationId(id);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

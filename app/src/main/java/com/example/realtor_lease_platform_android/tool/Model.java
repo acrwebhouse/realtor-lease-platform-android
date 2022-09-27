@@ -128,15 +128,15 @@ public class Model {
         }
     }
 
-    public void saveNotificationId(String firebaseToken){
+    public void saveNotificationId(String notificationId){
         if (dbHelper != null) {
             Config config = dbHelper.getConfig();
             if(config != null){
-                config.setAttribute(1,firebaseToken);
+                config.setAttribute(2,notificationId);
                 updateConfig(config);
             }else{
                 Config insertConfig = factory.createConfig();
-                insertConfig.setAttribute(1,firebaseToken);
+                insertConfig.setAttribute(2,notificationId);
                 insertConfig(insertConfig);
             }
         }

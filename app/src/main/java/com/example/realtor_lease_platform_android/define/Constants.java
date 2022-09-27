@@ -156,8 +156,10 @@ public class Constants {
     public static final String SORT="sort";
     public static final String COOKIE="Cookie";
     public static final String STATUS = "status";
+    public static final String DATA = "data";
     public static final String SERVER_TOKEN_TITLE="WDT=";
     public static final String SEMICOLON=";";
+    public static final String _ID = "_id";
 
     //rest api
     public static String ADD_NOTIFICATION_REST_API = SERVER_URL + "user-service/notification/addNotification";
