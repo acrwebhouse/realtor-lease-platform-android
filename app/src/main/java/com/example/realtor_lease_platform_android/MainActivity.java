@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private void createObj() {
         controlModel = factory.createModel(this);
 
-        Config config = new Config("firebaseToken", "account", "password", "notificationId");
+        Config config = new Config("firebaseToken", "account", "password", "notificationId", "userId");
         controlModel.insertConfig(config);
 
         Config r = controlModel.getConfig();
@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("db", "===2222=="+r.getPassword());
         Log.d("db", "===3333=="+r.getFirebaseToken());
         Log.d("db", "===4444=="+r.getNotificationId());
+        Log.d("db", "===5555=="+r.getUserId());
 //        Config config2 = new Config("firebaseToken3", "account3", "password3", "notificationId3");
 //        controlModel.updateConfig(config2);
 //        Log.d("db", "===1111=="+r.getAccount());

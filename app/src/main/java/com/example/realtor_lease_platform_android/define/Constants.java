@@ -117,13 +117,15 @@ public class Constants {
     public static final String CONFIG_NOTIFICATION_ID_SQL = "notificationId";
     public static final String CONFIG_ACCOUNT_SQL = "account";
     public static final String CONFIG_PASSWORD_SQL = "password";
+    public static final String CONFIG_USER_ID_SQL = "userId";
 
     public static final String CONFIG_TABLE_CREATE_SQL = "CREATE TABLE "
             + TABLE_CONFIG_SQL + " ( " + ID_SQL + "  INTEGER primary key autoincrement, "
             + CONFIG_FIREBASE_TOKEN_SQL + " text not null,"
             + CONFIG_NOTIFICATION_ID_SQL + " text not null,"
             + CONFIG_ACCOUNT_SQL + " text not null,"
-            + CONFIG_PASSWORD_SQL + " text not null"
+            + CONFIG_PASSWORD_SQL + " text not null,"
+            + CONFIG_USER_ID_SQL + " text not null"
             +"); ";
 
     //table system info

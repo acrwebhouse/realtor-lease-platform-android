@@ -55,6 +55,7 @@ public class DBConnection extends SQLiteOpenHelper {
         values.put(Constants.CONFIG_PASSWORD_SQL, config.getPassword());
         values.put(Constants.CONFIG_FIREBASE_TOKEN_SQL, config.getFirebaseToken());
         values.put(Constants.CONFIG_NOTIFICATION_ID_SQL, config.getNotificationId());
+        values.put(Constants.CONFIG_USER_ID_SQL, config.getUserId());
         long count = writeDatabase.insert(Constants.TABLE_CONFIG_SQL, null, values);
         return count;
     }
@@ -65,6 +66,7 @@ public class DBConnection extends SQLiteOpenHelper {
         values.put(Constants.CONFIG_PASSWORD_SQL, config.getPassword());
         values.put(Constants.CONFIG_FIREBASE_TOKEN_SQL, config.getFirebaseToken());
         values.put(Constants.CONFIG_NOTIFICATION_ID_SQL, config.getNotificationId());
+        values.put(Constants.CONFIG_USER_ID_SQL, config.getUserId());
         String whereClause = StringProcess.getQueryConfigWhereStringByPK(config);
         int count = writeDatabase.update(Constants.TABLE_CONFIG_SQL, values, whereClause, null);
         return count;

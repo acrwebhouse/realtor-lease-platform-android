@@ -63,8 +63,8 @@ public class Factory {
         return new Config();
     }
 
-    public Config createConfig(int id,String firebaseToken,String account,String password,String notificationId){
-        return new Config(id,firebaseToken,account,password,notificationId);
+    public Config createConfig(int id,String firebaseToken,String account,String password,String notificationId,String userId){
+        return new Config(id,firebaseToken,account,password,notificationId,userId);
     }
 
 }

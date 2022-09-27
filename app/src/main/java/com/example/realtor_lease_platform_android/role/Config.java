@@ -8,6 +8,7 @@ public class Config {
     private String account;
     private String password;
     private String notificationId;
+    private String userId;
 
     public Config(){
         id = 0;
@@ -15,22 +16,25 @@ public class Config {
         account = Constants.EMPTY_STRING;
         password = Constants.EMPTY_STRING;
         notificationId = Constants.EMPTY_STRING;
+        userId = Constants.EMPTY_STRING;
     }
 
-    public Config(int id,String firebaseToken,String account,String password,String notificationId){
+    public Config(int id,String firebaseToken,String account,String password,String notificationId,String userId){
         this.id = id;
         this.firebaseToken = firebaseToken;
         this.account = account;
         this.password = password;
         this.notificationId = notificationId;
+        this.userId = userId;
     }
 
-    public Config(String firebaseToken,String account,String password,String notificationId){
+    public Config(String firebaseToken,String account,String password,String notificationId,String userId){
         this.id = 0;
         this.firebaseToken = firebaseToken;
         this.account = account;
         this.password = password;
         this.notificationId = notificationId;
+        this.userId = userId;
     }
 
     public void setAttribute(int type, String attribute) {
@@ -49,6 +53,9 @@ public class Config {
                 break;
             case 4:
                 this.password = attribute;
+                break;
+            case 5:
+                this.userId = attribute;
                 break;
             default:
         }
@@ -73,4 +80,9 @@ public class Config {
     public String getNotificationId() {
         return notificationId;
     }
+
+    public String getUserId(){
+        return userId;
+    }
+
 }
