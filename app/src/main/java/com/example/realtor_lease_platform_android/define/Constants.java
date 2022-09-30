@@ -4,8 +4,8 @@ package com.example.realtor_lease_platform_android.define;
  * Created by Chris.Wu on 2016/10/21.
  */
 public class Constants {
-    public static String SERVER_URL = "https://matchrentdev.com/";
-//      public static String SERVER_URL = "http://192.168.0.10:3000/";
+//    public static String SERVER_URL = "https://matchrentdev.com/";
+      public static String SERVER_URL = "http://192.168.0.10:3000/";
 
     //web url
 //    public static final String ACTION_LOG_WEB_URL = "file:///android_asset/actionLogWeb.html";
@@ -41,7 +41,7 @@ public class Constants {
     //javascript
     public static final String ANDROID_PARAMETER_FOR_JAVASCRIPT = "appJsInterface";
     public static final String JAVASCRIPT_PARAMETER_FOR_ANDROID = "jsAppInterface";
-    public static final String INSERT_IP_HISTORY_LIST_JAVASCRIPT = "insertIpHistoryList";
+    public static final String SET_ACCOUNT_PASSWORD_JAVASCRIPT = "setAccountPassword";
     public static final String INSERT_ACCOUNT_HISTORY_LIST_JAVASCRIPT = "insertAccountHistoryList";
     public static final String INSERT_PROJECT_LIST_JAVASCRIPT = "insertProjectList";
     public static final String INSERT_FUNCTION_LIST_JAVASCRIPT = "insertFunctionList";
