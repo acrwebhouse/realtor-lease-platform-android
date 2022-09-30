@@ -34,9 +34,9 @@ public class Factory {
         return new DBConnection(context);
     }
 
-//    public JavaScriptInterface createJavaScriptInterface(Activity activity, WebView webView,Model model,ScrollView scrollView) {
-//        return new JavaScriptInterface(activity, webView,model, scrollView);
-//    }
+    public JavaScriptInterface createJavaScriptInterface( WebView webView,Model model) {
+        return new JavaScriptInterface( webView,model);
+    }
 
     public Model createModel(Activity activity) {
         return new Model(activity);

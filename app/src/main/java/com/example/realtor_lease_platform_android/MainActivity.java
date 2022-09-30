@@ -18,6 +18,7 @@ import android.webkit.WebChromeClient;
 
 import com.example.realtor_lease_platform_android.role.Config;
 import com.example.realtor_lease_platform_android.tool.Factory;
+import com.example.realtor_lease_platform_android.tool.JavaScriptInterface;
 import com.example.realtor_lease_platform_android.tool.Model;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     public ValueCallback<Uri[]> uploadMessage;
     public static final int REQUEST_SELECT_FILE = 100;
     private final static int FILECHOOSER_RESULTCODE = 1;
-
+    JavaScriptInterface controlJavaScriptInterface;
     private Factory factory = Factory.getInstance();
     private Model controlModel;
 
@@ -43,30 +44,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         createObj();
-        initWebView();
-        initFirebase();
     }
 
 
     private void createObj() {
         controlModel = factory.createModel(this);
         controlModel.initDB();
-      //  Config config = new Config("firebaseToken", "account", "password", "notificationId", "userId");
-//        controlModel.insertConfig(config);
-//
-        Config r = controlModel.getConfig();
-        Log.d("db", "===config=account="+r.getAccount());
-        Log.d("db", "===config=password="+r.getPassword());
-        Log.d("db", "===config=firebaseToken="+r.getFirebaseToken());
-        Log.d("db", "===config=notificationId="+r.getNotificationId());
-        Log.d("db", "===config=userId="+r.getUserId());
-//        Config config2 = new Config("firebaseToken3", "account3", "password3", "notificationId3");
-//        controlModel.updateConfig(config2);
-//        Log.d("db", "===1111=="+r.getAccount());
-//        Log.d("db", "===2222=="+r.getPassword());
-//        Log.d("db", "===3333=="+r.getFirebaseToken());
-//        Log.d("db", "===4444=="+r.getNotificationId());
-//        controlModel.deleteConfig();
+        initWebView();
+        initJavaScriptInterface();
+        initFirebase();
+    }
+
+    private void initJavaScriptInterface(){
+        controlJavaScriptInterface = factory.createJavaScriptInterface(webView,controlModel);
+        webView.addJavascriptInterface(controlJavaScriptInterface, Constants.ANDROID_PARAMETER_FOR_JAVASCRIPT);
     }
 
     private void initFirebase(){
@@ -149,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         webSettings.setDisplayZoomControls(false);
+//        webView.addJavascriptInterface();
     }
 
     @Override
