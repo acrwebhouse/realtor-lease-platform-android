@@ -128,6 +128,24 @@ public class Model {
         }
     }
 
+    public void saveConfig(String account,String password,String userId){
+        if (dbHelper != null) {
+            Config config = dbHelper.getConfig();
+            if (config != null) {
+                config.setAttribute(3, account);
+                config.setAttribute(4, password);
+                config.setAttribute(5, userId);
+                updateConfig(config);
+            } else {
+                Config insertConfig = factory.createConfig();
+                config.setAttribute(3, account);
+                config.setAttribute(4, password);
+                insertConfig.setAttribute(5, userId);
+                insertConfig(insertConfig);
+            }
+        }
+    }
+
     public void saveUserId(String userId){
         if (dbHelper != null) {
             Config config = dbHelper.getConfig();

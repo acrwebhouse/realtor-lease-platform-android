@@ -18,9 +18,11 @@ public class JavaScriptInterface {
     }
 
     @JavascriptInterface
-    public void saveUserId(final String userId) {
-        Log.d(TAG, "  saveUserId   " + userId);
-        controlModel.saveUserId(userId);
+    public void saveUserInfo(final String accoun,final String password,final String userId) {
+        Log.d(TAG, "  saveUserInfo  accoun " + accoun);
+        Log.d(TAG, "  saveUserInfo  password " + password);
+        Log.d(TAG, "  saveUserInfo  userId " + userId);
+        controlModel.saveConfig(accoun,password,userId);
         controlModel.sendNotificationRequest();
     }
 
@@ -34,6 +36,6 @@ public class JavaScriptInterface {
         Log.d(TAG, "  password   " +password);
         String setAccountPasswordUrl = StringProcess.getJavascriptFunctionSetAccountPasswordUrlString(account,password);
         Log.d(TAG, "  setAccountPassword  setAccountPasswordUrl " +setAccountPasswordUrl);
-        controlWebView.loadUrl(setAccountPasswordUrl);
+//        controlWebView.loadUrl(setAccountPasswordUrl);
     }
 }
