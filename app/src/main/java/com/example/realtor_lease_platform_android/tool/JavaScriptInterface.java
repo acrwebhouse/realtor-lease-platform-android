@@ -32,8 +32,8 @@ public class JavaScriptInterface {
         Config config =controlModel.getConfig();
         String account = config.getAccount();
         String password = config.getPassword();
-        Log.d(TAG, "  account   "+account );
-        Log.d(TAG, "  password   " +password);
+        Log.d(TAG, " setAccountPassword account   "+account );
+        Log.d(TAG, " setAccountPassword password   " +password);
         String setAccountPasswordUrl = StringProcess.getJavascriptFunctionSetAccountPasswordUrlString(account,password);
         Log.d(TAG, "  setAccountPassword  setAccountPasswordUrl " +setAccountPasswordUrl);
 //        controlWebView.loadUrl(setAccountPasswordUrl);
