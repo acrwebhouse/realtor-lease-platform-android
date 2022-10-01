@@ -1,5 +1,6 @@
 package com.example.realtor_lease_platform_android.tool;
 
+import android.app.Activity;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
@@ -10,11 +11,13 @@ public class JavaScriptInterface {
     private final String TAG = "JavaScriptInterface";
     private WebView controlWebView;
     private Model controlModel;
+    private Activity controlActivity;
 
-    public JavaScriptInterface(WebView webView, Model model
+    public JavaScriptInterface(Activity activity ,WebView webView, Model model
     ){
         controlWebView = webView;
         controlModel = model;
+        controlActivity = activity;
     }
 
     @JavascriptInterface
@@ -36,6 +39,12 @@ public class JavaScriptInterface {
         Log.d(TAG, " setAccountPassword password   " +password);
         String setAccountPasswordUrl = StringProcess.getJavascriptFunctionSetAccountPasswordUrlString(account,password);
         Log.d(TAG, "  setAccountPassword  setAccountPasswordUrl " +setAccountPasswordUrl);
-//        controlWebView.loadUrl(setAccountPasswordUrl);
+        controlActivity.runOnUiThread(new Runnable() {
+            //  @Override
+            public void run() {
+                controlWebView.loadUrl(setAccountPasswordUrl);
+            }
+        });
+
     }
 }

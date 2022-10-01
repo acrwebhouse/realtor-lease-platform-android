@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initJavaScriptInterface(){
-        controlJavaScriptInterface = factory.createJavaScriptInterface(webView,controlModel);
+        controlJavaScriptInterface = factory.createJavaScriptInterface(this,webView,controlModel);
         webView.addJavascriptInterface(controlJavaScriptInterface, Constants.ANDROID_PARAMETER_FOR_JAVASCRIPT);
     }
 
@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         WebSettings webSettings = webView.getSettings();
         webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setDomStorageEnabled(true);
         webView.loadUrl(url);//加载url
 
         webView.setWebChromeClient(new WebChromeClient()

@@ -11,14 +11,13 @@ public class StringProcess {
 
     // getJavascriptFunctionString
     public static String getJavascriptFunctionString(String arg, String functionName) {
-        String result = Constants.JAVASCRIPT + ":" + Constants.JAVASCRIPT_PARAMETER_FOR_ANDROID + "." + functionName + "('" + arg + "')";
+        String result = Constants.JAVASCRIPT + ":"+ functionName + "('" + arg + "')";
         return result;
     }
 
     public static String getJavascriptFunctionSetAccountPasswordUrlString(String account,String password) {
         String arg = account + "','" + password;
-//        return getJavascriptFunctionString(arg,Constants.SET_ACCOUNT_PASSWORD_JAVASCRIPT);
-        return getJavascriptFunctionString(arg,"aaa");
+        return getJavascriptFunctionString(arg,Constants.SET_ACCOUNT_PASSWORD_JAVASCRIPT);
     }
 
 }
