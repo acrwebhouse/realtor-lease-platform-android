@@ -47,4 +47,15 @@ public class JavaScriptInterface {
         });
 
     }
+
+    @JavascriptInterface
+    public void backPage() {
+        Log.d(TAG, "  backPage   " );
+        controlActivity.runOnUiThread(new Runnable() {
+            //  @Override
+            public void run() {
+                controlWebView.goBack();
+            }
+        });
+    }
 }
