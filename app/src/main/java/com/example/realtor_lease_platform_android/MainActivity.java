@@ -37,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
     JavaScriptInterface controlJavaScriptInterface;
     private Factory factory = Factory.getInstance();
     private Model controlModel;
-    private String errorHtml="<html><body><h1>Page not find！</h1></body></html>";
-
 
     //private String url = "http://www.google.com";
     @Override
@@ -82,13 +80,12 @@ public class MainActivity extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
         webSettings.setDomStorageEnabled(true);
         webView.loadUrl(url);//加载url
-
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onReceivedError(WebView view, int errorCode,
                     String description,String failingUrl) {
                 super.onReceivedError(view, errorCode, description, failingUrl);
-                //view.loadData(errorHtml, "text/html", "UTF-8");
+                webView.loadUrl(Constants.NETWORK_ERROR_WEB_URL);
             }
 
         });

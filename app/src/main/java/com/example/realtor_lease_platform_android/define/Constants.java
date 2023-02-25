@@ -8,6 +8,8 @@ public class Constants {
 //      public static String SERVER_URL = "http://192.168.0.10:3000/";
 
     //web url
+    public static final String NETWORK_ERROR_WEB_URL = "file:///android_asset/networkErrorWeb.html";
+//    public static final String NETWORK_ERROR_WEB_URL = "file:///asset/networkErrorWeb.html";
 //    public static final String ACTION_LOG_WEB_URL = "file:///android_asset/actionLogWeb.html";
 //    public static final String ALARM_LOG_WEB_URL = "file:///android_asset/alarmLogWeb.html";
 //    public static final String ALARM_SUMMARY_LOG_WEB_URL = "file:///android_asset/alarmSummaryLogWeb.html";
@@ -42,37 +44,7 @@ public class Constants {
     public static final String ANDROID_PARAMETER_FOR_JAVASCRIPT = "appJsInterface";
     public static final String JAVASCRIPT_PARAMETER_FOR_ANDROID = "jsAppInterface";
     public static final String SET_ACCOUNT_PASSWORD_JAVASCRIPT = "setDefaultAccountPassword";
-    public static final String INSERT_ACCOUNT_HISTORY_LIST_JAVASCRIPT = "insertAccountHistoryList";
-    public static final String INSERT_PROJECT_LIST_JAVASCRIPT = "insertProjectList";
-    public static final String INSERT_FUNCTION_LIST_JAVASCRIPT = "insertFunctionList";
-    public static final String INSERT_ALARM_SUMMARY_JAVASCRIPT = "insertAlarmSummary";
-    public static final String CB_ACCOUNT_LOGIN_JAVASCRIPT = "cbAccountLogin";
-    public static final String INSERT_NODE_LIST_JAVASCRIPT = "insertNodeList";
-    public static final String INSERT_R_TREND_ID_JAVASCRIPT = "insertRTrendId";
-    public static final String INSERT_R_TREND_CONFIG_JAVASCRIPT = "insertRTrendConfig";
-    public static final String INSERT_ALARM_LOG_JAVASCRIPT = "insertAlarmLog";
-    public static final String INSERT_ACTION_LOG_JAVASCRIPT = "insertActionLog";
-    public static final String INSERT_REAL_TIME_TAG_VALUES_JAVASCRIPT = "insertRealTimeTagValues";
-    public static final String INSERT_NODE_STATUS_JAVASCRIPT = "insertNodeStatus";
-    public static final String ALARM_ACK_STATUS_JAVASCRIPT = "alarmAckStatus";
-    public static final String ALARM_ACK_ALL_STATUS_JAVASCRIPT = "alarmAckAllStatus";
-    public static final String INSERT_TAGS_LIST_JAVASCRIPT = "insertTagsList";
-    public static final String INSERT_TAG_VALUE_JAVASCRIPT = "insertTagValue";
-    public static final String INSERT_TAGS_DATA_JAVASCRIPT = "insertTagsData";
 
-    public static final String INSERT_LANGUAGE_JAVASCRIPT ="insertLanguage";
-    public static final String INSERT_LOCAL_STORAGE_MEM_All_JAVASCRIPT ="insertLocalStorageMemAll";
-    public static final String INSERT_LOCAL_STORAGE_MEM_JAVASCRIPT ="insertLocalStorageMem";
-    public static final String INSERT_VERSION_JAVASCRIPT ="insertVersion";
-
-    public static final String INSERT_MAP_LIST_BY_NODE_JAVASCRIPT = "insertMapListByNode";
-    public static final String INSERT_MAP_CONFIG_JAVASCRIPT = "insertMapConfig";
-
-
-
-
-    //baidu
-    public static final String BAIDU_API_KEY = "PFPrBXtPvGpydK0gOfz2yBl1";
 
     //permissions
     public static final int SYSTEM_ALERT_WINDOW_PERMISSIONS_REQUEST_CODE = 0;
