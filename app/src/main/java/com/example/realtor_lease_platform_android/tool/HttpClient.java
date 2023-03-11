@@ -121,7 +121,7 @@ public class HttpClient {
         });
     }
 
-    public void editNotification(final String firebaseToken, final String userId , final String notificationId){
+    public void editNotification(final String firebaseToken, final String userId , final String notificationId ,final Model controlModel){
         RequestBody requestBody = new FormBody.Builder()
                 .add(Constants.ID, notificationId)
                 .add(Constants.TOKEN, firebaseToken)
@@ -144,6 +144,17 @@ public class HttpClient {
                 Log.d("http", "http rest api  editNotification  success  ");
                 String receiveMessage = response.body().string();
                 Log.d("http", "http rest api  editNotification  success   receiveMessage   " + receiveMessage);
+                JSONObject json = controlModel.getJsonObject(receiveMessage);
+                try {
+                    if(json.get(Constants.STATUS).toString().equals(Constants.FALSE_STRING)){
+                        String data = json.getString(Constants.DATA);
+                        if(data.equals((Constants.NOTIFICATION_NO_MATCH_ID))){
+                            addNotification(firebaseToken, userId , controlModel );
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

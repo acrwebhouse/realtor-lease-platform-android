@@ -133,6 +133,7 @@ public class Constants {
     public static final String SEMICOLON=";";
     public static final String _ID = "_id";
     public static final String ID = "id";
+    public static final String NOTIFICATION_NO_MATCH_ID = "no match id";
 
     //rest api
     public static String ADD_NOTIFICATION_REST_API = SERVER_URL + "user-service/notification/addNotification";
