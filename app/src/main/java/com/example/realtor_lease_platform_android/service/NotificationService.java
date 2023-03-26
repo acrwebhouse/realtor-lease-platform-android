@@ -27,6 +27,7 @@ public class NotificationService extends FirebaseMessagingService {
     private static final String TAG = "MyFirebaseMsgService";
     private static final String CHANNEL_ID = "default_channel_id";
     private static final String CHANNEL_NAME = "Default Channel";
+    private static  int notifyId = 0;
 
     public void showNotificationExe(Intent intent, Context context, String title, String message) {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
@@ -50,7 +51,7 @@ public class NotificationService extends FirebaseMessagingService {
                 .build();
 
         // Show the notification
-        notificationManager.notify(0, notification);
+        notificationManager.notify(notifyId++, notification);
     }
 
     private void showNotification(String message){
@@ -65,7 +66,6 @@ public class NotificationService extends FirebaseMessagingService {
                 content = notificationJson.getString(Constants.NOTIFICATION_CONTENT);
                 type = notificationJson.getInt(Constants.NOTIFICATION_TYPE);
                 Intent intent = new Intent(this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra(Constants.NOTIFICATION_TYPE,type);
                 switch (type){
                     case Constants.NOTIFICATION_TYPE_SYSTEM:
