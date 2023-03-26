@@ -57,7 +57,7 @@ public class NotificationService extends FirebaseMessagingService {
     private void showNotification(String message){
         Model controlModel = new Model();
         JSONObject notificationJson = controlModel.getJsonObject(message);
-        if(!notificationJson.equals(null)){
+        if(notificationJson != null){
             String title = Constants.EMPTY_STRING;
             String content = Constants.EMPTY_STRING;
             int type = 0;
