@@ -1,8 +1,18 @@
 package com.example.realtor_lease_platform_android.service;
 
+import com.example.realtor_lease_platform_android.MainActivity;
+import com.example.realtor_lease_platform_android.R;
+import com.example.realtor_lease_platform_android.define.Constants;
+import com.example.realtor_lease_platform_android.tool.Model;
 import com.google.firebase.messaging.FirebaseMessagingService;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -10,19 +20,82 @@ import androidx.annotation.NonNull;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class NotificationService extends FirebaseMessagingService {
     private static final String TAG = "MyFirebaseMsgService";
+    private static final String CHANNEL_ID = "default_channel_id";
+    private static final String CHANNEL_NAME = "Default Channel";
+    private static  int notifyId = 0;
+
+    public void showNotificationExe(Intent intent, Context context, String title, String message) {
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+
+        NotificationManager notificationManager =
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        // Create a notification channel for Android Oreo and above
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel =
+                    new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        // Create a notification
+        Notification notification = new Notification.Builder(context, CHANNEL_ID)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentIntent(pendingIntent)
+                .build();
+
+        // Show the notification
+        notificationManager.notify(notifyId++, notification);
+    }
+
+    private void showNotification(String message){
+        Model controlModel = new Model();
+        JSONObject notificationJson = controlModel.getJsonObject(message);
+        if(notificationJson != null){
+            String title = Constants.EMPTY_STRING;
+            String content = Constants.EMPTY_STRING;
+            int type = 0;
+            try {
+                title = notificationJson.getString(Constants.NOTIFICATION_TITLE);
+                content = notificationJson.getString(Constants.NOTIFICATION_CONTENT);
+                type = notificationJson.getInt(Constants.NOTIFICATION_TYPE);
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra(Constants.NOTIFICATION_TYPE,type);
+                switch (type){
+                    case Constants.NOTIFICATION_TYPE_SYSTEM:
+                        showNotificationExe(intent,this,title,content);
+                        break;
+                    case Constants.NOTIFICATION_TYPE_RESERVE_HOUSE:
+                        String reserveHouseId = notificationJson.getString(Constants.NOTIFICATION_RESERVE_HOUSE_ID);
+                        intent.putExtra(Constants.NOTIFICATION_RESERVE_HOUSE_ID,reserveHouseId);
+                        showNotificationExe(intent,this,title,content);
+                        break;
+                    default:
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
 
     // [START receive_message]
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
-        Log.d(TAG, "From: " + remoteMessage.getFrom());
+
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
+            showNotification(Constants.EMPTY_STRING + remoteMessage.getData());
 
             if (/* Check if data needs to be processed by long running job */ true) {
                 // For long-running tasks (10 seconds or more) use WorkManager.

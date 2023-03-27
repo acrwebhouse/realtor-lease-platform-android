@@ -20,6 +20,7 @@ import com.example.realtor_lease_platform_android.role.Config;
 import com.example.realtor_lease_platform_android.tool.Factory;
 import com.example.realtor_lease_platform_android.tool.JavaScriptInterface;
 import com.example.realtor_lease_platform_android.tool.Model;
+import com.example.realtor_lease_platform_android.tool.StringProcess;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
@@ -37,15 +38,31 @@ public class MainActivity extends AppCompatActivity {
     JavaScriptInterface controlJavaScriptInterface;
     private Factory factory = Factory.getInstance();
     private Model controlModel;
+    private static final String TAG = "MyFirebaseMsgService";
 
     //private String url = "http://www.google.com";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate : " );
+        resolveIntent();
         setContentView(R.layout.activity_main);
         createObj();
     }
 
+    private void resolveIntent(){
+        Intent intent = getIntent();
+        int type = intent.getIntExtra(Constants.NOTIFICATION_TYPE,0);
+        switch (type){
+            case Constants.NOTIFICATION_TYPE_SYSTEM:
+                break;
+            case Constants.NOTIFICATION_TYPE_RESERVE_HOUSE:
+                String reserveHouseId = intent.getStringExtra(Constants.NOTIFICATION_RESERVE_HOUSE_ID);
+                url = StringProcess.getReserveHouseUrl(reserveHouseId);
+                break;
+            default:
+        }
+    }
 
     private void createObj() {
         controlModel = factory.createModel(this);

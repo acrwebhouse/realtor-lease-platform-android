@@ -9,36 +9,6 @@ public class Constants {
 
     //web url
     public static final String NETWORK_ERROR_WEB_URL = "file:///android_asset/networkErrorWeb.html";
-//    public static final String NETWORK_ERROR_WEB_URL = "file:///asset/networkErrorWeb.html";
-//    public static final String ACTION_LOG_WEB_URL = "file:///android_asset/actionLogWeb.html";
-//    public static final String ALARM_LOG_WEB_URL = "file:///android_asset/alarmLogWeb.html";
-//    public static final String ALARM_SUMMARY_LOG_WEB_URL = "file:///android_asset/alarmSummaryLogWeb.html";
-//    public static final String SINGLE_VALUE_URL = "file:///android_asset/loginWeb.html";
-//    public static final String CONFIG_WEB_URL = "file:///android_asset/configWeb.html";
-//    public static final String HOME_WEB_URL = "file:///android_asset/homeWeb.html";
-//    public static final String IP_INPUT_WEB_URL = "file:///android_asset/ipInputWeb.html";
-//    public static final String LOGIN_WEB_URL = "file:///android_asset/loginWeb.html";
-
-    public static final String ACTION_LOG_WEB_URL = "file:///android_asset/actionLog.html";
-    public static final String ALARM_LOG_WEB_URL = "file:///android_asset/alarmLog.html";
-    public static final String ALARM_SUMMARY_LOG_WEB_URL = "file:///android_asset/alarmSummary.html";
-    public static final String SINGLE_VALUE_URL = "file:///android_asset/login.html";
-    public static final String CONFIG_WEB_URL = "file:///android_asset/config.html";
-    public static final String HOME_WEB_URL = "file:///android_asset/home.html";
-    public static final String IP_INPUT_WEB_URL = "file:///android_asset/ipInput.html";
-    public static final String LOGIN_WEB_URL = "file:///android_asset/login.html";
-    public static final String TREND_WEB_URL = "file:///android_asset/trend.html";
-    public static final String TREND_LIST_WEB_URL = "file:///android_asset/trendList.html";
-    public static final String TAGS_INFO_GROUP_WEB_URL = "file:///android_asset/tagsInfoGroup.html";
-    public static final String TAGS_INFO_LIST_WEB_URL = "file:///android_asset/tagsInfoList.html";
-    public static final String TAGS_INFO_VALUE_WEB_URL = "file:///android_asset/tagsInfoValue.html";
-    public static final String GOOGLE_MAP_WEB_URL = "file:///android_asset/googleMap.html";
-    public static final String NODE_STATUS_WEB_URL = "file:///android_asset/nodeStatus.html";
-    public static String DASHBOARD_VIEW_WEB_URL = SERVER_URL+"/wadashboard/dashboardviewer";
-
-    public static final String MAP_LOCAL_WEB_URL = "file:///android_asset/map.html";
-    public static final String BAIDU_MAP_LOCAL_WEB_URL = "file:///android_asset/bmapPage.html";
-    public static final String MAP_LIST_LOCAL_WEB_URL = "file:///android_asset/mapList.html";
 
     //javascript
     public static final String ANDROID_PARAMETER_FOR_JAVASCRIPT = "appJsInterface";
@@ -133,9 +103,17 @@ public class Constants {
     public static final String SEMICOLON=";";
     public static final String _ID = "_id";
     public static final String ID = "id";
+    public static final String NOTIFICATION_NO_MATCH_ID = "no match id";
 
     //rest api
     public static String ADD_NOTIFICATION_REST_API = SERVER_URL + "user-service/notification/addNotification";
     public static String EDIT_NOTIFICATION_REST_API = SERVER_URL + "user-service/notification/editNotification";
 
+    //notification
+    public static final String NOTIFICATION_TYPE = "type";
+    public static final String NOTIFICATION_TITLE = "title";
+    public static final String NOTIFICATION_CONTENT = "body";
+    public static final String NOTIFICATION_RESERVE_HOUSE_ID = "reserveHouseId";
+    public static final int NOTIFICATION_TYPE_RESERVE_HOUSE = 1;
+    public static final int NOTIFICATION_TYPE_SYSTEM = 0;
 }
