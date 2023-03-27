@@ -80,7 +80,9 @@ text-align: center;
     element.addEventListener("click", myFunction);
 
     function myFunction() {
-      console.log("Hello World!")
+      if(typeof(appJsInterface) !== 'undefined'){
+         appJsInterface.restartApp();
+      }
     }
 </script>
 

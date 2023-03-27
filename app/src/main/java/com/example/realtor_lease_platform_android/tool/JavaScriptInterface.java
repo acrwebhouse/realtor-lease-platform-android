@@ -5,6 +5,7 @@ import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 
+import com.example.realtor_lease_platform_android.define.Constants;
 import com.example.realtor_lease_platform_android.role.Config;
 
 public class JavaScriptInterface {
@@ -55,6 +56,17 @@ public class JavaScriptInterface {
             //  @Override
             public void run() {
                 controlWebView.goBack();
+            }
+        });
+    }
+
+    @JavascriptInterface
+    public void restartApp() {
+        Log.d(TAG, "  restartApp   " );
+        controlActivity.runOnUiThread(new Runnable() {
+            //  @Override
+            public void run() {
+                controlWebView.loadUrl(Constants.SERVER_URL);
             }
         });
     }
