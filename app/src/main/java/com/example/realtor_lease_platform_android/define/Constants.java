@@ -5,7 +5,7 @@ package com.example.realtor_lease_platform_android.define;
  */
 public class Constants {
     public static String SERVER_URL = "https://matchrentdev.com/";
-//      public static String SERVER_URL = "http://192.168.0.10:3000/";
+//      public static String SERVER_URL = "http://192.168.0.100:3000/";
 
     //web url
     public static final String NETWORK_ERROR_WEB_URL = "file:///android_asset/networkErrorWeb.html";
