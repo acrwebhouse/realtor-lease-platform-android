@@ -55,16 +55,7 @@
         }
 
     </style>
-    <script>
-        const element = document.getElementById("myBtn");
-        element.addEventListener("click", myFunction);
 
-        function myFunction() {
-          if(typeof(appJsInterface) !== 'undefined'){
-             appJsInterface.restartApp();
-          }
-        }
-    </script>
 </head>
 <body>
 
@@ -77,6 +68,15 @@
         </button>
     </div>
 </div>
+<script>
+        const element = document.getElementById("myBtn");
+        element.addEventListener("click", myFunction);
 
+        function myFunction() {
+          if(typeof(appJsInterface) !== 'undefined'){
+             appJsInterface.restartApp();
+          }
+        }
+    </script>
 </body>
 </html>
