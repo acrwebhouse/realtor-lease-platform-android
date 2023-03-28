@@ -81,4 +81,15 @@ public class JavaScriptInterface {
             }
         });
     }
+
+    @JavascriptInterface
+    public void showInternelErrorPage() {
+        Log.d(TAG, "showInternelErrorPage");
+        controlActivity.runOnUiThread(new Runnable() {
+            //  @Override
+            public void run() {
+                controlWebView.loadUrl(Constants.NETWORK_ERROR_WEB_URL);
+            }
+        });
+    }
 }
