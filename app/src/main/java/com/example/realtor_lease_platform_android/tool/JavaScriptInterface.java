@@ -22,11 +22,11 @@ public class JavaScriptInterface {
     }
 
     @JavascriptInterface
-    public void saveUserInfo(final String accoun,final String password,final String userId) {
-        Log.d(TAG, "  saveUserInfo  accoun " + accoun);
+    public void saveUserInfo(final String account,final String password,final String userId) {
+        Log.d(TAG, "  saveUserInfo  account " + account);
         Log.d(TAG, "  saveUserInfo  password " + password);
         Log.d(TAG, "  saveUserInfo  userId " + userId);
-        controlModel.saveConfig(accoun,password,userId);
+        controlModel.saveConfig(account,password,userId);
         controlModel.sendNotificationRequest();
     }
 
@@ -67,6 +67,28 @@ public class JavaScriptInterface {
             //  @Override
             public void run() {
                 controlWebView.loadUrl(Constants.SERVER_URL);
+            }
+        });
+    }
+
+    @JavascriptInterface
+    public void loadUrl(final String url) {
+        Log.d(TAG, "  loadUrl  url " +url);
+        controlActivity.runOnUiThread(new Runnable() {
+            //  @Override
+            public void run() {
+                controlWebView.loadUrl(Constants.SERVER_URL + url);
+            }
+        });
+    }
+
+    @JavascriptInterface
+    public void showInternelErrorPage() {
+        Log.d(TAG, "showInternelErrorPage");
+        controlActivity.runOnUiThread(new Runnable() {
+            //  @Override
+            public void run() {
+                controlWebView.loadUrl(Constants.NETWORK_ERROR_WEB_URL);
             }
         });
     }

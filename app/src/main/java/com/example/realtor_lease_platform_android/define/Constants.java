@@ -4,9 +4,9 @@ package com.example.realtor_lease_platform_android.define;
  * Created by Chris.Wu on 2016/10/21.
  */
 public class Constants {
-    public static String SERVER_URL = "https://matchrentdev.com/";
-//      public static String SERVER_URL = "http://192.168.0.100:3000/";
-
+    public static String SERVER_URL = "https://matchrentdev.com";
+//      public static String SERVER_URL = "http://192.168.0.100:3000";
+//      public static String SERVER_URL = "http://192.168.0.11:3000";
     //web url
     public static final String NETWORK_ERROR_WEB_URL = "file:///android_asset/networkErrorWeb.html";
 
@@ -106,8 +106,8 @@ public class Constants {
     public static final String NOTIFICATION_NO_MATCH_ID = "no match id";
 
     //rest api
-    public static String ADD_NOTIFICATION_REST_API = SERVER_URL + "user-service/notification/addNotification";
-    public static String EDIT_NOTIFICATION_REST_API = SERVER_URL + "user-service/notification/editNotification";
+    public static String ADD_NOTIFICATION_REST_API = SERVER_URL + "/user-service/notification/addNotification";
+    public static String EDIT_NOTIFICATION_REST_API = SERVER_URL + "/user-service/notification/editNotification";
 
     //notification
     public static final String NOTIFICATION_TYPE = "type";
