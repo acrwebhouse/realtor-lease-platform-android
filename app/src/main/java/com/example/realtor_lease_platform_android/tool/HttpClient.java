@@ -158,4 +158,42 @@ public class HttpClient {
             }
         });
     }
+
+    public void login(final String account, final String password ,final Model controlModel,final JavaScriptInterface javaScriptInterface, final String loadUrl ){
+        RequestBody requestBody = new FormBody.Builder()
+                .add(Constants.ACCOUNT_OR_MAIL, account)
+                .add(Constants.PASSWORD, password)
+                .build();
+        Request request = new Request.Builder()
+                .url(Constants.LOGIN_REST_API)
+                .post(requestBody)
+                .build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d("http", "http rest api  login  fail         ");
+                javaScriptInterface.showInternelErrorPage();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Log.d("http", "http rest api  login  success  ");
+                String receiveMessage = response.body().string();
+                Log.d("http", "http rest api  login  success   receiveMessage   " + receiveMessage);
+                JSONObject json = controlModel.getJsonObject(receiveMessage);
+                try {
+                    if(json.get(Constants.STATUS).toString().equals(Constants.TRUE_STRING)){
+                        JSONObject data = (JSONObject) json.get(Constants.DATA);
+                        String token = data.getString(Constants.TOKEN);
+                        javaScriptInterface.autoLogin(token,loadUrl);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+
 }

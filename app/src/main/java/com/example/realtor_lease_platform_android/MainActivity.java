@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Build;
+import android.webkit.CookieManager;
 import android.webkit.ValueCallback;
 import android.webkit.WebView;
 import android.os.Bundle;
@@ -70,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
         initWebView();
         initJavaScriptInterface();
         initFirebase();
+        controlModel.setJavaScriptInterface(controlJavaScriptInterface);
+        controlModel.autoLogin(url);
     }
 
     private void initJavaScriptInterface(){
@@ -96,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
         webSettings.setJavaScriptEnabled(true);
         webSettings.setDomStorageEnabled(true);
-        webView.loadUrl(url);//加载url
+
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onReceivedError(WebView view, int errorCode,
@@ -167,7 +170,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
         webSettings.setDisplayZoomControls(false);
-//        webView.addJavascriptInterface();
+
+//        controlModel.autoLogin();
+
+        //webViewLoadUrl("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZTY0ZjM5ZWJmMjAzMDAxZjZiMjAyMCIsInJvbGVzIjpbNCwzXSwiZXhwaXJlZCI6MzAwMDAwLCJpYXQiOiIyMDIzLTA0LTEyVDEyOjI2OjAzLjM5N1oifQ.HOY-UqcgVqffEwPBBWcG5DycWWI-Ul40B7AoFFuhFOg");
+    }
+
+    public void webViewLoadUrl(String token){
+        CookieManager cookieManager = CookieManager.getInstance();
+        cookieManager.setAcceptCookie(true);
+        //cookieManager.setCookie(url, StringProcess.getCookieTokenRow(token));
+        webView.loadUrl(url);//加载url
     }
 
     @Override

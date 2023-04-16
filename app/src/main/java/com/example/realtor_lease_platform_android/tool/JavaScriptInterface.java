@@ -2,6 +2,7 @@ package com.example.realtor_lease_platform_android.tool;
 
 import android.app.Activity;
 import android.util.Log;
+import android.webkit.CookieManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 
@@ -89,6 +90,22 @@ public class JavaScriptInterface {
             //  @Override
             public void run() {
                 controlWebView.loadUrl(Constants.NETWORK_ERROR_WEB_URL);
+            }
+        });
+    }
+
+
+    @JavascriptInterface
+    public void autoLogin(String token, String loadUrl) {
+        Log.d(TAG, "autoLogin token : "+token);
+        Log.d(TAG, "autoLogin loadUrl : "+loadUrl);
+        CookieManager cookieManager = CookieManager.getInstance();
+        cookieManager.setAcceptCookie(true);
+        cookieManager.setCookie(Constants.SERVER_URL, StringProcess.getCookieTokenRow(token));
+        controlActivity.runOnUiThread(new Runnable() {
+            //  @Override
+            public void run() {
+                controlWebView.loadUrl(loadUrl);
             }
         });
     }
