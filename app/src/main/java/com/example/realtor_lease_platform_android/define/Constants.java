@@ -73,6 +73,7 @@ public class Constants {
     public static final String SLASH = "//";
     public static final String EMPTY_STRING = "";
     public static final String IP = "ip";
+    public static final String ACCOUNT_OR_MAIL = "accountOrMail";
     public static final String USERNAME = "username";
     public static final String ACCOUNT = "account";
     public static final String PASSWORD = "password";
@@ -108,6 +109,7 @@ public class Constants {
     //rest api
     public static String ADD_NOTIFICATION_REST_API = SERVER_URL + "/user-service/notification/addNotification";
     public static String EDIT_NOTIFICATION_REST_API = SERVER_URL + "/user-service/notification/editNotification";
+    public static String LOGIN_REST_API = SERVER_URL + "/auth-service/auth/login";
 
     //notification
     public static final String NOTIFICATION_TYPE = "type";

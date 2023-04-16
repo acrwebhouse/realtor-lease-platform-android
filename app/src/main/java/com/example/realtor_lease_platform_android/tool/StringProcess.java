@@ -25,4 +25,8 @@ public class StringProcess {
         return Constants.SERVER_URL + "/21/" + reserveHouseId;
     }
 
+    public static String getCookieTokenRow(String token) {
+        return "x-token="+token;
+    }
+
 }
