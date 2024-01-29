@@ -135,13 +135,6 @@ public class Model {
                 insertConfig.setAttribute(1,firebaseToken);
                 insertConfig(insertConfig);
             }
-            config = dbHelper.getConfig();
-            if(config.getNotificationId().equals(Constants.EMPTY_STRING)){
-                Log.d("http", "http rest api  addNotification  start         ");
-                httpClient.addNotification(config.getFirebaseToken(),config.getUserId(),this);
-            }else{
-                httpClient.editNotification(config.getFirebaseToken(),config.getUserId(),config.getNotificationId(),this);
-            }
         }
     }
 
