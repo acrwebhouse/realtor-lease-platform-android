@@ -185,11 +185,12 @@ public class HttpClient {
                 try {
                     if(json.get(Constants.STATUS).toString().equals(Constants.TRUE_STRING)){
                         JSONObject data = (JSONObject) json.get(Constants.DATA);
-                        String token = data.getString(Constants.TOKEN);
-                        javaScriptInterface.autoLogin(token,loadUrl);
+                        String refreshToken = data.getString(Constants.REFRESH_TOKEN);
+                        javaScriptInterface.autoLogin(refreshToken,loadUrl);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    javaScriptInterface.showInternelErrorPage();
                 }
             }
         });

@@ -11,7 +11,7 @@ public class Constants {
     public static final String NETWORK_ERROR_WEB_URL = "file:///android_asset/networkErrorWeb.html";
 
     //javascript
-    public static final String ANDROID_PARAMETER_FOR_JAVASCRIPT = "appJsInterface";
+    public static final String ANDROID_PARAMETER_FOR_JAVASCRIPT = "jsToAndroidInterface";
     public static final String JAVASCRIPT_PARAMETER_FOR_ANDROID = "jsAppInterface";
     public static final String SET_ACCOUNT_PASSWORD_JAVASCRIPT = "setDefaultAccountPassword";
 
@@ -105,6 +105,8 @@ public class Constants {
     public static final String _ID = "_id";
     public static final String ID = "id";
     public static final String NOTIFICATION_NO_MATCH_ID = "no match id";
+    public static final String ACCESS_TOKEN = "accessToken";
+    public static final String REFRESH_TOKEN = "refreshToken";
 
     //rest api
     public static String ADD_NOTIFICATION_REST_API = SERVER_URL + "/user-service/notification/addNotification";

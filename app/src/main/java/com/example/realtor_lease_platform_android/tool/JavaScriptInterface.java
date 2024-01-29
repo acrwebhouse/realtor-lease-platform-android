@@ -84,6 +84,24 @@ public class JavaScriptInterface {
     }
 
     @JavascriptInterface
+    public void callUp(final int phoneNumber) {
+        Log.d(TAG, "  callUp  phoneNumber " + phoneNumber);
+
+    }
+
+    @JavascriptInterface
+    public void addLineFriend(final String lineId) {
+        Log.d(TAG, "  addLineFriend  lineId " + lineId);
+
+    }
+
+    @JavascriptInterface
+    public void saveNotificationInfo(final String xToken) {
+        Log.d(TAG, "  saveNotificationInfo  xToken " + xToken);
+
+    }
+
+    @JavascriptInterface
     public void showInternelErrorPage() {
         Log.d(TAG, "showInternelErrorPage");
         controlActivity.runOnUiThread(new Runnable() {
@@ -96,12 +114,12 @@ public class JavaScriptInterface {
 
 
     @JavascriptInterface
-    public void autoLogin(String token, String loadUrl) {
-        Log.d(TAG, "autoLogin token : "+token);
+    public void autoLogin(String refreshToken, String loadUrl) {
         Log.d(TAG, "autoLogin loadUrl : "+loadUrl);
         CookieManager cookieManager = CookieManager.getInstance();
         cookieManager.setAcceptCookie(true);
-        cookieManager.setCookie(Constants.SERVER_URL, StringProcess.getCookieTokenRow(token));
+        String cookieStr = StringProcess.getCookieTokenRow(refreshToken);
+        cookieManager.setCookie(Constants.SERVER_URL, cookieStr);
         controlActivity.runOnUiThread(new Runnable() {
             //  @Override
             public void run() {
