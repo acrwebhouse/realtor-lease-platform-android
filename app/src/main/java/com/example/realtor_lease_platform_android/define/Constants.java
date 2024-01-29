@@ -107,6 +107,7 @@ public class Constants {
     public static final String NOTIFICATION_NO_MATCH_ID = "no match id";
     public static final String ACCESS_TOKEN = "accessToken";
     public static final String REFRESH_TOKEN = "refreshToken";
+    public static final String X_TOKEN = "x-token";
 
     //rest api
     public static String ADD_NOTIFICATION_REST_API = SERVER_URL + "/user-service/notification/addNotification";

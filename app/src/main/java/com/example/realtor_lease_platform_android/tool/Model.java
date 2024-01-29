@@ -170,14 +170,14 @@ public class Model {
         }
     }
 
-    public void sendNotificationRequest(){
+    public void sendNotificationRequest(String xToken){
         if (dbHelper != null) {
             Config config = dbHelper.getConfig();
             if(config.getNotificationId().equals(Constants.EMPTY_STRING)){
                 Log.d("http", "http rest api  addNotification  start         ");
-                httpClient.addNotification(config.getFirebaseToken(),config.getUserId(),this);
+                httpClient.addNotification(config.getFirebaseToken(),config.getUserId(),this,xToken);
             }else{
-                httpClient.editNotification(config.getFirebaseToken(),config.getUserId(),config.getNotificationId(),this);
+                httpClient.editNotification(config.getFirebaseToken(),config.getUserId(),config.getNotificationId(),this,xToken);
             }
         }
     }

@@ -28,7 +28,7 @@ public class JavaScriptInterface {
         Log.d(TAG, "  saveUserInfo  password " + password);
         Log.d(TAG, "  saveUserInfo  userId " + userId);
         controlModel.saveConfig(account,password,userId);
-        controlModel.sendNotificationRequest();
+        //controlModel.sendNotificationRequest();
     }
 
     @JavascriptInterface
@@ -98,7 +98,7 @@ public class JavaScriptInterface {
     @JavascriptInterface
     public void saveNotificationInfo(final String xToken) {
         Log.d(TAG, "  saveNotificationInfo  xToken " + xToken);
-
+        controlModel.sendNotificationRequest(xToken);
     }
 
     @JavascriptInterface

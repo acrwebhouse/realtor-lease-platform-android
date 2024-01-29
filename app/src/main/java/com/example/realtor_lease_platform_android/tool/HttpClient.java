@@ -85,7 +85,7 @@ public class HttpClient {
         return okHttpClient.newCall(request);
     }
 
-    public void addNotification(final String firebaseToken, final String userId ,Model controlModel ){
+    public void addNotification(final String firebaseToken, final String userId ,Model controlModel, final String xToken){
         RequestBody requestBody = new FormBody.Builder()
                 .add(Constants.TOKEN, firebaseToken)
                 .add(Constants.USER_ID, userId)
@@ -93,6 +93,7 @@ public class HttpClient {
                 .build();
         Request request = new Request.Builder()
                 .url(Constants.ADD_NOTIFICATION_REST_API)
+                .addHeader(Constants.X_TOKEN,xToken)
                 .post(requestBody)
                 .build();
         Call call = okHttpClient.newCall(request);
@@ -121,7 +122,7 @@ public class HttpClient {
         });
     }
 
-    public void editNotification(final String firebaseToken, final String userId , final String notificationId ,final Model controlModel){
+    public void editNotification(final String firebaseToken, final String userId , final String notificationId ,final Model controlModel , final String xToken){
         RequestBody requestBody = new FormBody.Builder()
                 .add(Constants.ID, notificationId)
                 .add(Constants.TOKEN, firebaseToken)
@@ -130,6 +131,7 @@ public class HttpClient {
                 .build();
         Request request = new Request.Builder()
                 .url(Constants.EDIT_NOTIFICATION_REST_API)
+                .addHeader(Constants.X_TOKEN,xToken)
                 .put(requestBody)
                 .build();
         Call call = okHttpClient.newCall(request);
@@ -146,10 +148,14 @@ public class HttpClient {
                 Log.d("http", "http rest api  editNotification  success   receiveMessage   " + receiveMessage);
                 JSONObject json = controlModel.getJsonObject(receiveMessage);
                 try {
-                    if(json.get(Constants.STATUS).toString().equals(Constants.FALSE_STRING)){
+                    if(json.get(Constants.STATUS).toString().equals(Constants.TRUE_STRING)){
                         String data = json.getString(Constants.DATA);
                         if(data.equals((Constants.NOTIFICATION_NO_MATCH_ID))){
-                            addNotification(firebaseToken, userId , controlModel );
+                            addNotification(firebaseToken, userId , controlModel ,xToken );
+                        }else{
+                            JSONObject dataObj = (JSONObject) json.get(Constants.DATA);
+                            String id = dataObj.getString(Constants._ID);
+                            controlModel.saveNotificationId(id);
                         }
                     }
                 } catch (JSONException e) {
