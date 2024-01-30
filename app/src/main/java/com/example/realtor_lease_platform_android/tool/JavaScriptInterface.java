@@ -107,7 +107,23 @@ public class JavaScriptInterface {
     @JavascriptInterface
     public void addLineFriend(final String lineId) {
         Log.d(TAG, "  addLineFriend  lineId " + lineId);
+        // Line ID，替換成你要加的好友的 Line ID
 
+        // 生成 Line 的 URI
+        Uri uri = Uri.parse("line://ti/p/~" + lineId);
+
+        // 建立 Intent 並設定 Action 為 VIEW，Data 為 Line URI
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+
+        // 判斷是否安裝了 Line App
+        if (intent.resolveActivity(controlActivity.getPackageManager()) != null) {
+            Log.d(TAG, "  addLineFriend  lineId 111" );
+            // 如果安裝了 Line App，啟動 Line App 並開啟加好友畫面
+            controlActivity.startActivity(intent);
+        } else {
+            Log.d(TAG, "  addLineFriend  lineId 222" );
+            // 如果沒有安裝 Line App，你可以提供一些提示或處理沒有安裝的情況
+        }
     }
 
     @JavascriptInterface
