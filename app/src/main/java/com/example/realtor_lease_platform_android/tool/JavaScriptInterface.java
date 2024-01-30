@@ -1,6 +1,8 @@
 package com.example.realtor_lease_platform_android.tool;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.webkit.CookieManager;
 import android.webkit.JavascriptInterface;
@@ -84,8 +86,21 @@ public class JavaScriptInterface {
     }
 
     @JavascriptInterface
-    public void callUp(final int phoneNumber) {
+    public void callUp(final String phoneNumber) {
         Log.d(TAG, "  callUp  phoneNumber " + phoneNumber);
+        // 要撥打的電話號碼
+        String callNumber = "tel:" + phoneNumber;
+
+        // 建立一個 Intent 物件，指定動作為 ACTION_CALL
+        Intent dialIntent = new Intent(Intent.ACTION_CALL);
+
+        // 設定 Uri，表示要執行的動作和資料
+        dialIntent.setData(Uri.parse(callNumber));
+        try {
+            controlActivity.startActivity(dialIntent);
+        }catch (Error error){
+
+        }
 
     }
 

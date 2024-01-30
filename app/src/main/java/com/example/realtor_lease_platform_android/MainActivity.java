@@ -2,9 +2,13 @@ package com.example.realtor_lease_platform_android;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.webkit.CookieManager;
 import android.webkit.ValueCallback;
@@ -28,6 +32,9 @@ import com.google.firebase.iid.InstanceIdResult;
 
 import com.example.realtor_lease_platform_android.define.Constants;
 
+
+import androidx.core.content.ContextCompat;
+
 public class MainActivity extends AppCompatActivity {
     private WebView webView;
     private String url = Constants.SERVER_URL;
@@ -41,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
     private Model controlModel;
     private static final String TAG = "MyFirebaseMsgService";
 
-    //private String url = "http://www.google.com";
+    private static final int CALL_PHONE_PERMISSION_REQUEST_CODE = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +57,34 @@ public class MainActivity extends AppCompatActivity {
         resolveIntent();
         setContentView(R.layout.activity_main);
         createObj();
+        checkPhonePermission();
+    }
+
+    private void checkPhonePermission(){
+        // 檢查是否已經授予 CALL_PHONE 權限
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+                ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE)
+                        != PackageManager.PERMISSION_GRANTED) {
+            // 如果沒有權限，請求權限
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CALL_PHONE},
+                    CALL_PHONE_PERMISSION_REQUEST_CODE);
+        } else {
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (requestCode == CALL_PHONE_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // 使用者同意權限，執行撥打電話的程式碼
+                //makePhoneCall();
+            } else {
+                // 使用者拒絕權限，你可以提供一些提示或處理拒絕的情況
+            }
+        }
     }
 
     private void resolveIntent(){
