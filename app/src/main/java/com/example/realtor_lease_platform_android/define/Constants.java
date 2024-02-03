@@ -108,6 +108,9 @@ public class Constants {
     public static final String ACCESS_TOKEN = "accessToken";
     public static final String REFRESH_TOKEN = "refreshToken";
     public static final String X_TOKEN = "x-token";
+    public static final String LINE_PACKAGE_NAME = "jp.naver.line.android";
+    public static final String GOOGLE_PLAY_LINE_LINK = "market://details?id=" + LINE_PACKAGE_NAME;
+    public static final String GOOGLE_PLAY_VENDING = "com.android.vending";
 
     //rest api
     public static String ADD_NOTIFICATION_REST_API = SERVER_URL + "/user-service/notification/addNotification";

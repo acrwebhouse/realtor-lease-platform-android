@@ -115,14 +115,30 @@ public class JavaScriptInterface {
         // 建立 Intent 並設定 Action 為 VIEW，Data 為 Line URI
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 
-        // 判斷是否安裝了 Line App
-        if (intent.resolveActivity(controlActivity.getPackageManager()) != null) {
-            Log.d(TAG, "  addLineFriend  lineId 111" );
-            // 如果安裝了 Line App，啟動 Line App 並開啟加好友畫面
+        try {
             controlActivity.startActivity(intent);
-        } else {
-            Log.d(TAG, "  addLineFriend  lineId 222" );
-            // 如果沒有安裝 Line App，你可以提供一些提示或處理沒有安裝的情況
+        }catch (Error error){
+            openLineInstallPage();
+        }
+    }
+
+    private void openLineInstallPage() {
+        try {
+            String linePackageName = Constants.LINE_PACKAGE_NAME;
+
+            // 创建Intent并设置动作为查看Intent
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+
+            // 设置URI，包括Google Play上Line应用的链接
+            intent.setData(Uri.parse(Constants.GOOGLE_PLAY_LINE_LINK));
+
+            // 设置标志，指定使用Google Play打开链接
+            intent.setPackage(Constants.GOOGLE_PLAY_VENDING);
+
+            // 启动Intent
+            controlActivity.startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
